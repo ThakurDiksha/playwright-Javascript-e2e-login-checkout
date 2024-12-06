@@ -1,9 +1,12 @@
 # playwright-Javascript-e2e-login-checkout
 Playwright E2E Automation test script for validating/testing user login, adding products to cart, and checkout workflow for a demo e-commerce web application using JavaScript.
 
+
 Project Overview:
 
 This project automates the end-to-end testing of a user login process, adding products to the cart, completing the checkout process and review the ordered item details from Order History. It is built using Playwright and JavaScript, ensuring a robust and reliable testing workflow for e-commerce web applications.
+
+Additionally, it contains test script for automating User form-filling process by using Playwright's special Locators and how to work with calenders.
 
 
 Technologies Used:
