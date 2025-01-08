@@ -4,7 +4,7 @@ const {test, expect} = require ('@playwright/test');
 
 //TEST 1 
 
-test.only('Validating user checkout End to End', async ({browser})=>   //function that has no name can also be written as ()==>
+test.only('Validating user checkout End to End', async ({browser})=>   //function that has no name can also be written as ()=>
 {                                                  //there is "browser" fixture comes along automatically with playwright package
   
 const context = await browser.newContext();
@@ -16,7 +16,7 @@ await page.goto("https://rahulshettyacademy.com/client/");
 console.log("the title of this page is " + await page.title()); 
 
 //strore required values into variables
-const productName = 'ZARA COAT 3';
+const productName = 'ADIDAS ORIGINAL';
 const userName = page.locator('input#userEmail');
 const signIn = page.locator('input#login');
 const password = page.locator('input#userPassword');
@@ -40,17 +40,19 @@ const productCount = await products.count();   //counting how many totol product
 //iterate over each product in the products unitl the target product is found
 for (let i=0; i<productCount; ++i)           
 {
-if (await products.nth(i).locator("b").textContent() === productName)        //comparing each item with the target product
+if ( await products.nth(i).locator("b").textContent() === productName)        //comparing each item with the target product
 {
 await products.nth(i).locator("text = Add To Cart").click();
+console.log("Added product to cart: " + productName);
+//await page.waitForTimeout(3000);  //explicit Wait for 3 seconds to ensure product is loaded
 break;
 }
 }
 
 //// Go to the cart and verify the product is added
 await page.locator("[routerlink = '/dashboard/cart']").click();  
-await page.locator("div li").first().waitFor({ timeout: 60000 });           //wait untill atleast one produst is loaded on the page
-const checkVisible = await page.locator("h3:has-text('ZARA COAT 3')").isVisible();
+await page.locator("div li").first().waitFor({ timeout: 60000 });     //wait untill atleast one produst is loaded on the page
+const checkVisible = await page.locator("h3:has-text('ADIDAS ORIGINAL')").isVisible();
 expect(checkVisible).toBeTruthy();
 
 
@@ -104,7 +106,7 @@ for (let i=0;i<countryCount;++i)
 
 
 //validate user email address:
-expect(page.locator(".user__name [type='text']").first()).toHaveText(email);
+await expect(page.locator(".user__name [type='text']").first()).toHaveText(email);
 
 //click place order
 await page.locator(".action__submit").click();
@@ -114,7 +116,7 @@ await expect(page.locator(".hero-primary")).toHaveText(" Thankyou for the order.
 
 //print the order number
 const orderNumber = await page.locator("td.em-spacer-1 .ng-star-inserted").textContent();
-console.log("The Order number is :" + orderNumber);
+console.log("Your Order number is :" + orderNumber);
 
 
 //fetch your order detail from orders history
