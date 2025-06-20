@@ -16,7 +16,7 @@ await page.goto("https://rahulshettyacademy.com/client/");
 console.log("the title of this page is " + await page.title()); 
 
 //strore required values into variables
-const productName = 'ADIDAS ORIGINAL';
+const productName = 'IPHONE 13 PRO';
 const userName = page.locator('input#userEmail');
 const signIn = page.locator('input#login');
 const password = page.locator('input#userPassword');
@@ -28,12 +28,16 @@ await password.fill("Deepakpatial@31");
 await signIn.click();
 await page.waitForLoadState('networkidle');   //wait for network to be idle
 
+await page.waitForLoadState('load');
+
+
 //get all products titles
 const products = page.locator(".card-body");
 const titles = await page.locator(".card-body b").allTextContents();  
 console.log("The titles are : " + titles);
 
-const productCount = await products.count();   //counting how many totol products are there under '.card-body'
+//counting how many totol products are there under '.card-body'
+const productCount = await products.count();   
 
 
 //Search for the target product and add it to the cart
@@ -49,10 +53,11 @@ break;
 }
 }
 
-//// Go to the cart and verify the product is added
+
+//Go to the cart and verify the product is added
 await page.locator("[routerlink = '/dashboard/cart']").click();  
 await page.locator("div li").first().waitFor({ timeout: 60000 });     //wait untill atleast one produst is loaded on the page
-const checkVisible = await page.locator("h3:has-text('ADIDAS ORIGINAL')").isVisible();
+const checkVisible = await page.locator("h3:has-text('IPHONE 13 PRO')").isVisible();
 expect(checkVisible).toBeTruthy();
 
 
@@ -141,13 +146,17 @@ for (let i=0; i<ordersCount; ++i)
 //validating if we land on correct page by validating the order number
 const orderIdDetails = await page.locator(".col-text").textContent();
 expect(orderNumber.includes(orderIdDetails)).toBeTruthy();
+
+console.log(`The order number is ${orderNumber} and the order ID is ${orderIdDetails}`);
 }
 
 );
 
 
 
+
 //NOTE: FOR SOME METHODS, PLAYWRIGHT DOSEN'T SUPPORT AUTOMATIC WAIT, SO WE HAVE TO EXPLICITYL USED SOME WAIT
 //MECHANISMS TO TELL OUR CODE TO WAIT
 
-//Test2_addToCart_and_Checkout.spec.js
+//Test_E2E_userLogin_addToCart_and_Checkout.spec.js
+
