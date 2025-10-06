@@ -10,6 +10,10 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: playwright-Javascript-e2e-login-checkout
+
     steps:
     # Check out the repository
     - uses: actions/checkout@v4
