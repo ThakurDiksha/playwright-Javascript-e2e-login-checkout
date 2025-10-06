@@ -41,7 +41,7 @@ const productCount = await products.count();
 
 
 //Search for the target product and add it to the cart
-//iterate over each product in the products unitl the target product is found
+//iterate over each productunitl the target product is found
 for (let i=0; i<productCount; ++i)           
 {
 if ( await products.nth(i).locator("b").textContent() === productName)        //comparing each item with the target product
