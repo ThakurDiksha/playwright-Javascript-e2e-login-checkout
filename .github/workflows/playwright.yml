@@ -12,7 +12,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: playwright-Javascript-e2e-login-checkout
+        working-directory: ./playwright-Javascript-e2e-login-checkout
 
     steps:
     # Check out the repository
