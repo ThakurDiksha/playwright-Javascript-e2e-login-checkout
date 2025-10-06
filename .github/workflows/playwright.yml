@@ -18,8 +18,13 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+        cache: 'npm'
 
-    # Install dependencies
+    #Ensure npm is updated (fixes lockfile compatibility)
+    - name: Update npm
+      run: npm install -g npm@latest
+
+    # Install dependencies 
     - name: Install dependencies
       run: npm ci
 
