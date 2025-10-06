@@ -10,9 +10,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ./playwright-Javascript-e2e-login-checkout
+    
 
     steps:
     # Check out the repository
@@ -23,10 +21,7 @@ jobs:
       with:
         node-version: lts/*
         cache: 'npm'
-
-    #Ensure npm is updated (fixes lockfile compatibility)
-    - name: Update npm
-      run: npm install -g npm@latest
+        
 
     # Install dependencies 
     - name: Install dependencies
